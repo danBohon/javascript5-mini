@@ -1,4 +1,7 @@
+
+
 var customers = [
+
   {
     id: 1,
     first_name: "Gisele",
@@ -71,10 +74,40 @@ var customers = [
   }
 ];
 
+function map(array, fn) {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    newArray.push(fn(array[i], i, array))
+  }
+  return newArray;
+}
+
 // Create an array of all email addresses
 // first without using lodash's map (with property argument) method, then with it.
 
 //CODE HERE
+
+// const customerEmails = map(customers, )
+const customerEmails = map( customers, (e, index, array) => e.email + index + array.length)
+console.log("customer emails------>" , customerEmails);
+
+
+// Customers whose first name starts with a capital M
+function filter(array, fn) {
+  const newArray = [];
+    for (let i = 0; i < array.lenght; i++) {
+      if (fn(array[i], i, array == true)) {
+        newArray.push(array[i])
+      }
+    } 
+  
+
+  return newArray;
+}
+
+// const customersThatStartWithM = customers.filter(customers, e => e.first_name.charAt(0) === "M")
+const customersThatStartWithM = filter(customers, e => e.first_name.charAt(0) === "M")
+console.log('--------customers that start with m', customersThatStartWithM);
 
 
 
@@ -106,6 +139,9 @@ var friendsOfBetty = [
   "Tom",
   "Nancy"
 ];
+
+const intersection = _.intersection(friendsOfJim, friendsOfBetty);
+console.log("--------- intersection", intersection);
 
 // Jim and Betty are having a party, but they only want to invite mutual friends.
 // Create an array of mutual friends. First without using lodash.
@@ -148,3 +184,6 @@ var purchases = [
 
 // First, group the purchases by company without lodash
 // then do it again using _.groupBy()
+
+const groupOrders = _.groupBy(purchases, e => e.company);
+console.log("--------------groupdeOrders", groupOrders);
